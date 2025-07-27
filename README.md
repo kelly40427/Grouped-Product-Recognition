@@ -71,6 +71,6 @@ The paper is available [here](https://essay.utwente.nl/107957/).
 The code is available on [the code folder](code/).
 
 ## Contacts
-For any questions, suggestions, or issues, please send an email to [kelly40427kelly40427@gmail.com](kelly40427kelly40427@gmail.com)
+For any questions, suggestions, or issues, please send an email to [kelly40427kelly40427@gmail.com](mailto:kelly40427kelly40427@gmail.com)
 
 
