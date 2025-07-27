@@ -65,7 +65,7 @@ Table 4: Best clustering results for grouped product recognition on each dataset
 ## Discussions 
 
 ## The paper
-The paper is available [here](paper/grouped_product_recognition.pdf)
+The paper is available [here](https://essay.utwente.nl/107957/).
 
 ## Code
 
