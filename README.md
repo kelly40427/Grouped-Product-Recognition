@@ -64,6 +64,18 @@ Table 4: Best clustering results for grouped product recognition on each dataset
 
 ## Discussions 
 
+![Grocery Product dataset results](paper/grocery_product_results.png)
+
+(a) Examples of grouped product recognition results on Grocery Product dataset.
+
+![WebMarket dataset results](paper/webmarket_results.png)
+
+(b) Examples results of grouped product recognition on WebMarket dataset.
+
+![Dutch Markets dataset results](paper/dutch_markets_results.png)
+
+(c) Predictions of grouped product recognition on Dutch Markets dataset.
+
 ## The paper
 The paper is available [here](https://essay.utwente.nl/107957/).
 
