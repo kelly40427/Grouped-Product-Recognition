@@ -9,11 +9,11 @@ The proposed framework operates in three stages. First, YOLOv5 is used to detect
 ![Grouped product recognition framwork](paper/project_process.drawio.png)
 
 ## Validation
-**Datasets:** For our experimental evaluation, we used two publicly available datasets: Grocery Products and WebMarket, and a self-collected dataset, Dutch Markets, which contains images from Dutch supermarkets. This dataset was uesd as a test to assess the framework under real-world conditions.
+**Datasets:** For our experimental evaluation, we used two publicly available datasets: Grocery Products and WebMarket, and a self-collected dataset, Dutch Markets, which contains images from Dutch supermarkets. This dataset was used as a test to assess the framework under real-world conditions.
 
-**Evaluation metrics:** Distinct evaluation metrics are applied at different stages of our framework. Grocery product detection stage is evaluated usinh Precision, Recall, and F1-score. For the grouped product recognition stage, we employ clustering evaluation metrics, including Adjusted Rand Index (ARI), Normalized Mutual Information (NMI), and Silhouette Score, to assess clustering quality.
+**Evaluation metrics:** Distinct evaluation metrics are applied at different stages of our framework. Grocery product detection stage is evaluated using Precision, Recall, and F1-score. For the grouped product recognition stage, we employ clustering evaluation metrics, including Adjusted Rand Index (ARI), Normalized Mutual Information (NMI), and Silhouette Score, to assess clustering quality.
 
-**Results:** Table 1 compares our YOLOv5-based implementation for grocery product recognition with previous works and best-performing object grounding result. Our YOLOv5 model achieved a precision of 89.0%, a recall of 89.2%, and an F1-score of 89.1% on the Grocery Products dataset. On the WebMarket dataset, our implementation achieved a precision of 92.1%, a recall of 93.8%, and an F1-score of 92.94%. For Dutch Markets, the YOLOv5 model trained on Grocery Products performed the best, with a precision of 91.9%, a recall of 89.9%, and an F1-score of 90.9%, as shown in Table 2.
+**Results:** Table 1 compares our YOLOv5-based implementation for grocery product recognition with previous works and the best-performing object grounding result. Our YOLOv5 model achieved a precision of 89.0%, a recall of 89.2%, and an F1-score of 89.1% on the Grocery Products dataset. On the WebMarket dataset, our implementation achieved a precision of 92.1%, a recall of 93.8%, and an F1-score of 92.94%. For Dutch Markets, the YOLOv5 model trained on Grocery Products performed the best, with a precision of 91.9%, a recall of 89.9%, and an F1-score of 90.9%, as shown in Table 2.
 
 Table 3 presents the best clustering performance under fixed thresholds. Agglomerative Clustering with CNN + Color + Spatial features achieved the highest ARI (0.7894) and NMI (0.8020) on Grocery Products. For WebMarket and Dutch Markets, CNN-based features combined with color and texture reported the best results. As shown in Table 4, adopting Silhouette Score-based threshold optimization strategy achieved the highest performance across datasets.
 
@@ -63,6 +63,7 @@ Table 3: Best clustering results for grouped product recognition on each dataset
 Table 4: Best clustering results for grouped product recognition on each dataset using Agglomerative and OPTICS under optimal threshold selction.
 
 ## Discussions 
+One major challenge in grouped product recognition is working without labeled categories, which means the model must depend entirely on features such as visual, text, and spatial information. Unlike supervised methods, our unsupervised framework should handle scenarios where products share highly similar appearances or exhibit minimal discriminative differences. This challenge becomes harder in real-world retail scenarios, where products are densely packed, frequently overlap, and often suffer from partial occlusion and inconsistent lighting conditions.
 
 ![Grocery Product dataset results](paper/grocery_product_results.png)
 
@@ -75,6 +76,23 @@ Table 4: Best clustering results for grouped product recognition on each dataset
 ![Dutch Markets dataset results](paper/dutch_markets_results.png)
 
 (c) Predictions of grouped product recognition on Dutch Markets dataset.
+
+The figures above illustrate example results of grouped product recognition across three datasets. Our framework successfully groups visually similar products into meaningful clusters, even in cluttered shelf layouts. However, some misgroupings remain, particularly in scenarios involving highly similar packaging or small items.
+
+Feature selection plays a crucial role in clustering quality. CNN-based features are the most effective, which capture rich semantic representations. Incorporating color and texture features enhances performance significantly. Spatial features also provide small but consistent improvements. Combining CNN, color, and spatial features consistently achieved higher ARI and NMI scores. Text features can also help, but this depends on image quality since blurred or low-resolution text may reduce performance.
+
+Another factor that influences performance is product size. Our analysis found that medium-sized and large-sized products usually achieve better clustering performance, while small products perform the worst. This happens because small items may affect the visibility of key features, making it hard to extract strong features.
+
+For object detection, we observed a substantial gap between our YOLOv5-based model and Vision-Language Models (VLMs) such as GPT-4o and InternVL2.5. VLMs often struggle to detect products accurately, and their results vary significantly depending on the prompt provided. In contrast, YOLOv5 consistently achieved higher accuracy across all datasets, demonstrating its suitability for object detection in densely packed retail environments.
+
+These findings offer a practical foundation for real-world applications such as automatic shelf monitoring, inventory management, and planogram compliance in retail settings. The proposed framework demonstrates strong potential for real-world retail applications.
+
+**Limitation and Future Work:**
+
+Although our framework achieves strong performance in grouped product recognition, several limitations remain. First, detection accuracy decreases in cluttered or densely packed shelves, making it difficult to separate individual items. Second, text-based features are not always reliable because blurry images or small fonts on packaging often lead to recognition errors. Finally, the clustering stage is sensitive to parameter selection, which can affect consistency across datasets.
+
+Future work will address these limitations in three directions. Detection can be improved for small and overlapping products by using advanced models such as YOLOv7 or by integrating post-processing steps. More advanced OCR methods, such as TrOCR, or image pre-processing strategies, can help extract clearer text features. Additionally, exploring alternative and more advanced clustering techniques could improve clustering performance.
+
 
 ## The paper
 The paper is available [here](https://essay.utwente.nl/107957/).
